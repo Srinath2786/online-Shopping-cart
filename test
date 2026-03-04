@@ -1,0 +1,10 @@
+Pages ready:
+http://localhost:8082/catalog
+http://localhost:8082/product?id=1
+http://localhost:8082/cart
+mvn exec:java
+
+
+cd "d:\lab 3"
+mvn -DskipTests clean package
+mvn -DskipTests exec:java
