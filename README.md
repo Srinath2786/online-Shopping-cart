@@ -1,135 +1,225 @@
-# Online Shopping Cart JSP Application
+# 🛒 Online Shopping Cart
 
-A polished online shopping cart prototype implemented with Jakarta JSP, MySQL, and Apache Tomcat. This project demonstrates a full-stack e-commerce cart flow with product listing, cart management, quantity updates, and secure database persistence.
+A Java-based Online Shopping Cart web application developed using **Java, JSP, Jakarta Servlets, JDBC, MySQL, HTML, CSS, and JavaScript**. The project demonstrates the core concepts of Java web development by implementing product browsing, shopping cart management, and database integration using the MVC architecture.
 
-## Project Overview
+---
 
-This repository contains a Java-based web application built for a professional shopping cart experience. It is designed to showcase:
+# 📖 Project Overview
 
-- Responsive shopping cart UI using JSP
-- MySQL-backed cart item management
-- JDBC connection pooling for scalable database access
-- Deployment via Apache Tomcat or Maven plugin
-- Clean modular architecture for enterprise-style web apps
+The Online Shopping Cart application allows users to browse products, add them to a shopping cart, update quantities, remove items, and view the total amount. The application uses JSP for the user interface, Jakarta Servlets for business logic, JDBC for database connectivity, and MySQL for storing product and cart information.
 
-## Key Features
+---
 
-- Display cart items from a relational database
-- Add, update, and remove cart products
-- Quantity handling and total pricing
-- Seamless front-end interaction using JSP pages
-- Transaction persistence with MySQL
-- Production-ready packaging as WAR
+# ✨ Features
 
-## Technical Stack
+* Browse available products
+* Add products to the shopping cart
+* Update product quantity
+* Remove products from the cart
+* Calculate total price automatically
+* Session-based shopping cart
+* MySQL database integration
+* MVC architecture
 
-- Java 17+
-- Jakarta Servlet / JSP
-- Apache Tomcat 10+
-- Maven build system
-- MySQL database
-- JDBC / connection pooling
+---
 
-## Setup Instructions
+# 🛠️ Tech Stack
 
-### 1. Prerequisites
+| Technology         | Description           |
+| ------------------ | --------------------- |
+| Java 17            | Backend               |
+| JSP                | View Layer            |
+| Jakarta Servlets   | Controller            |
+| JDBC               | Database Connectivity |
+| MySQL              | Database              |
+| HTML5              | Structure             |
+| CSS3               | Styling               |
+| JavaScript         | Client-side           |
+| Apache Tomcat 10   | Web Server            |
+| Maven              | Build Tool            |
+| Visual Studio Code | IDE                   |
 
-- Java 17 or later
-- Apache Tomcat 10.x or newer
-- MySQL Server
-- Maven 3.8+
+---
 
-### 2. Initialize Database
+# 📂 Project Structure
 
-Run the provided schema script:
-
-```bash
-mysql -u root -p < src/main/resources/schema.sql
+```text
+online-shopping-cart/
+│
+├── src/
+│   └── main/
+│       ├── java/
+│       │   ├── dao/
+│       │   ├── model/
+│       │   ├── servlet/
+│       │   └── util/
+│       │
+│       └── webapp/
+│           ├── css/
+│           ├── images/
+│           ├── js/
+│           ├── WEB-INF/
+│           └── *.jsp
+│
+├── database/
+│   └── shopping_cart.sql
+│
+├── pom.xml
+└── README.md
 ```
 
-Or execute manually:
+---
+
+# 💾 Database Setup
+
+## Step 1: Install MySQL
+
+Download and install MySQL Server.
+
+---
+
+## Step 2: Create Database
 
 ```sql
-CREATE DATABASE IF NOT EXISTS cart_db;
-USE cart_db;
-
-CREATE TABLE IF NOT EXISTS cart_items (
-  id BIGINT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
-  sku VARCHAR(50) NOT NULL,
-  image_url VARCHAR(500),
-  price DECIMAL(10, 2) NOT NULL,
-  quantity INT NOT NULL DEFAULT 1,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-
-INSERT INTO cart_items (name, sku, image_url, price, quantity) VALUES
-('Wireless Headphones', 'SKU-1001', 'https://picsum.photos/80?1', 89.99, 1),
-('Mechanical Keyboard', 'SKU-1002', 'https://picsum.photos/80?2', 129.50, 2),
-('Ergonomic Mouse', 'SKU-1003', 'https://picsum.photos/80?3', 49.95, 1);
+CREATE DATABASE shopping_cart;
+USE shopping_cart;
 ```
 
-### 3. Configure Database Connection
+---
 
-Update `src/main/resources/database.properties` with your credentials:
+## Step 3: Import Database
 
-```properties
-db.driver=com.mysql.cj.jdbc.Driver
-db.url=jdbc:mysql://localhost:3306/cart_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-db.username=root
-db.password=your_mysql_password
-db.pool.size=10
+If the repository contains the SQL file:
+
+```
+database/shopping_cart.sql
 ```
 
-### 4. Build the Project
+Import it using **MySQL Workbench**.
+
+**OR**
+
+Open **phpMyAdmin**
+
+* Create a database named **shopping_cart**
+* Click **Import**
+* Select **shopping_cart.sql**
+* Click **Go**
+
+---
+
+## Step 4: Configure Database Connection
+
+Update your database credentials in the JDBC connection class.
+
+```java
+String url = "jdbc:mysql://localhost:3306/shopping_cart";
+String username = "root";
+String password = "your_password";
+```
+
+---
+
+# 🚀 Run the Project
+
+## Method 1 – Download ZIP
+
+1. Download the ZIP from GitHub.
+2. Extract the ZIP file.
+3. Open the project in **Visual Studio Code**.
+4. Install:
+
+   * Java JDK 17+
+   * Extension Pack for Java
+   * Maven
+   * Apache Tomcat 10
+   * MySQL Server
+5. Import the database.
+6. Update the database username and password.
+7. Build the project.
 
 ```bash
-mvn clean package
+mvn clean install
 ```
 
-The build generates the deployable WAR file at:
+8. Deploy the project to Apache Tomcat.
+9. Start Tomcat.
+10. Open your browser.
+
+```
+http://localhost:8080/online-shopping-cart/
+```
+
+---
+
+## Method 2 – Clone from GitHub
 
 ```bash
-target/cart-jsp.war
+git clone https://github.com/Srinath2786/online-Shopping-cart.git
 ```
 
-### 5. Deploy to Tomcat
+Open the project in Visual Studio Code and follow the same steps above.
 
-Copy the WAR file to Tomcat's webapps directory:
+---
+
+# 📦 Build Project
 
 ```bash
-cp target/cart-jsp.war $CATALINA_HOME/webapps/
+mvn clean install
 ```
 
-Start Tomcat and access the app:
+Generated WAR file:
 
-```bash
-http://localhost:8080/cart-jsp/
+```
+target/online-shopping-cart.war
 ```
 
-## Deployment Options
+---
 
-- Deploy using Apache Tomcat
-- Use Maven Tomcat plugin for direct deployment
+# 🌐 Application URL
 
-## Application URLs
+```
+http://localhost:8080/online-shopping-cart/
+```
 
-- Home: `http://localhost:8080/cart-jsp/`
-- Cart endpoint: `http://localhost:8080/cart-jsp/cart`
+---
 
-## Recommended Repository Name
+# 📚 Learning Outcomes
 
-- `online-shopping-cart-jsp`
-- `shopping-cart-webapp`
-- `java-shopping-cart`
+* Java Web Development
+* JSP
+* Jakarta Servlets
+* JDBC
+* CRUD Operations
+* Session Management
+* MVC Architecture
+* MySQL Integration
+* Maven Project Structure
+* Apache Tomcat Deployment
 
-## Recommended GitHub Description
+---
 
-`Professional online shopping cart application built with Java JSP, MySQL, and Tomcat. Supports cart management, quantity updates, and persistent database storage.`
+# 🚀 Future Enhancements
 
-## Notes
+* User Login & Registration
+* Admin Dashboard
+* Product Search
+* Product Categories
+* Wishlist
+* Order History
+* Online Payment Gateway
+* Responsive Design
 
-- Keep database credentials out of source control.
-- Use Maven to manage dependencies and packaging.
-- This project is suitable for portfolio presentation and academic submission.
+---
+
+# 👨‍💻 Author
+
+**Srinath M**
+
+B.E. Computer Science and Engineering
+
+GitHub: https://github.com/Srinath2786
+
+---
+
+⭐ If you found this project helpful, please consider giving it a Star.
