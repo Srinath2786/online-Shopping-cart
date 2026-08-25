@@ -2,7 +2,7 @@
 
 A Java-based Online Shopping Cart web application developed using **Java, JSP, Jakarta Servlets, JDBC, MySQL, HTML, CSS, and JavaScript**. The project demonstrates the core concepts of Java web development by implementing product browsing, shopping cart management, and database integration using the MVC architecture.
 
----
+----
 
 # 📖 Project Overview
 
